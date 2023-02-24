@@ -1,7 +1,9 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
-app.config()
+# add extra config to "app" with key and value
+# the value is a URI (link to a file, rather than a Url which links to a site)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
 db = SQLAlchemy(app)
 
 class Item(db.Model):
