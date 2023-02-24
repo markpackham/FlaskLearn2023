@@ -1,6 +1,10 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
+db = SQLAlchemy(app)
+
+class Item(db.Model):
+    name = db.Column(db.String(length=255), nullable=False, unique=True)
 
 
 # make sure to turn "Debug mode" ON so code changes are updated
