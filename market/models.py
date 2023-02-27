@@ -1,10 +1,11 @@
 from market import db
+# database stored in "\instance\market.db"
 
 class User(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(length=30), nullable=False, unique=True)
-    email_address = db.Column(db.String(length=255), nullable=False, unique=True)
-    password_hash = db.Column(db.String(length=255), nullable=False)
+    email_address = db.Column(db.String(length=50), nullable=False, unique=True)
+    password_hash = db.Column(db.String(length=60), nullable=False)
     budget = db.Column(db.Integer(), nullable=False, default=1000)
     # grab all items in one go so set "lazy" to True
     # this won't be stored as a column but as a relationship
