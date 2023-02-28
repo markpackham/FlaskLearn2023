@@ -4,6 +4,7 @@ from market.models import Item, User
 from market.forms import RegisterForm
 from market import db
 
+
 @app.route("/")
 @app.route("/home")
 def home_page():
@@ -20,7 +21,8 @@ def market_page():
 def login_page():
     return render_template('login.html')
 
-@app.route('/register', methods=['GET','POST'])
+
+@app.route('/register', methods=['GET', 'POST'])
 def register_page():
     form = RegisterForm()
     if form.validate_on_submit():
