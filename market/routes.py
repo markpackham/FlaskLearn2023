@@ -34,6 +34,6 @@ def register_page():
     # form.errors is a builtin dictionary field
     if form.errors != {}:
         for err_msg in form.errors.values():
-            flash(f'There was an error with user creation: {err_msg}')
+            flash(f'There was an error with creating a user: {err_msg}', category='danger')
 
     return render_template('register.html', form=form)
