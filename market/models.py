@@ -1,6 +1,7 @@
 from market import db
 # database stored in "\instance\market.db"
 from market import bcrypt, login_manager
+from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
