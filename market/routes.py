@@ -45,5 +45,10 @@ def login_page():
     if form.validate_on_submit():
         attempted_user = User.query.get(form.username.data).first()
         if attempted_user and attempted_user.check_password_correct(attempted_password=form.password.data):
-
+            login_user(attempted_user)
+            flash(f'Login Successful, you are logged in as: {attempted_user.username}', category='success')
+            return redirect(url_for('market_page'))
+        else:
+            flash(f'Login params invalid', category='danger')
+            
     return render_template('login.html', form=form)
