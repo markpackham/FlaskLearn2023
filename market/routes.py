@@ -50,5 +50,5 @@ def login_page():
             return redirect(url_for('market_page'))
         else:
             flash(f'Login params invalid', category='danger')
-            
+
     return render_template('login.html', form=form)
