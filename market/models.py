@@ -19,6 +19,7 @@ class User(db.Model):
 
     @password.setter
     def password(self, plain_text_password):
+        # overide what is stored as password_hash so it actually becomes a hash
         self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
 
 
