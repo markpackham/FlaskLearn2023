@@ -3,6 +3,7 @@ from market import app
 from market import db
 from market.forms import RegisterForm, LoginForm
 from market.models import Item, User
+from flask_login import login_user
 
 
 @app.route("/")
@@ -40,4 +41,9 @@ def register_page():
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
     form = LoginForm()
+    # check all info if valid and is triggered when we hit submit button on form
+    if form.validate_on_submit():
+        attempted_user = User.query.get(form.username.data).first()
+        if attempted_user and attempted_user.check_password_correct(attempted_password=form.password.data):
+
     return render_template('login.html', form=form)
