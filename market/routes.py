@@ -43,7 +43,7 @@ def login_page():
     form = LoginForm()
     # check all info if valid and is triggered when we hit submit button on form
     if form.validate_on_submit():
-        attempted_user = User.query.get(form.username.data).first()
+        attempted_user = User.query.filter_by(username=form.username.data).first()
         if attempted_user and attempted_user.check_password_correct(attempted_password=form.password.data):
             login_user(attempted_user)
             flash(f'Login Successful, you are logged in as: {attempted_user.username}', category='success')
