@@ -13,6 +13,8 @@ def home_page():
 
 
 @app.route('/market')
+# login_required prevents unauthorized users from accessing market
+@login_required
 def market_page():
     items = Item.query.all()
     return render_template('market.html', items=items)
