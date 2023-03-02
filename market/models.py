@@ -3,9 +3,11 @@ from market import db
 from market import bcrypt, login_manager
 from flask_login import UserMixin
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
@@ -25,6 +27,15 @@ class User(db.Model, UserMixin):
     def password(self, plain_text_password):
         # overide what is stored as password_hash so it actually becomes a hash
         self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+
+    @property
+    def prettier_budget(self):
+        if len(str(self.budget)) >= 4:
+            # show commas for large numbers, 3rd digit starting from right
+            # so £1000 becomes £1,000
+            return f'£{str(self.budget)[:-3]},{str(self.budget)[-3:]}'
+        else:
+            return f'£{self.budget}'
 
     def check_password_correct(self, attempted_password):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)

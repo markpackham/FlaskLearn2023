@@ -9,7 +9,7 @@
         <form method="POST" class="form-signin" style="color:white">
             {{ form.hidden_tag() }}
             <h1 class="h3 mt-2 mb-3 font-weight-normal">
-                Please Login
+                Please Login (all passwords are "password")
             </h1>
             <br>
             {{ form.username.label() }}
@@ -17,7 +17,6 @@
 
             {{ form.password.label() }}
             {{ form.password(class="form-control", placeholder="Password") }}
-
             <br>
 
 
