@@ -3,7 +3,7 @@ from market import app
 from market import db
 from market.forms import RegisterForm, LoginForm
 from market.models import Item, User
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 
 @app.route("/")
