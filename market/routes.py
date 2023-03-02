@@ -3,7 +3,7 @@ from market import app
 from market import db
 from market.forms import RegisterForm, LoginForm
 from market.models import Item, User
-from flask_login import login_user
+from flask_login import login_user, logout_user
 
 
 @app.route("/")
@@ -52,3 +52,11 @@ def login_page():
             flash(f'Login params invalid', category='danger')
 
     return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def logout_page():
+    # this is a builtin function from flask_login
+    logout_user()
+    flash(f'You have been logged out', category='info')
+    return redirect(url_for('home_page'))
