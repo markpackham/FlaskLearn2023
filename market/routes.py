@@ -24,9 +24,7 @@ def market_page():
         if p_item_object:
             if current_user.can_purchase(p_item_object):
                 # assign item ownership to user who purchased
-                p_item_object.owner = current_user.id
-                current_user.budget -= p_item_object.price
-                db.session.commit()
+                p_item_object.buy(current_user)
                 flash(f'{p_item_object} purchased', category="success")
             else:
                 flash(f'Sorry, you cannot afford that', category="danger")
