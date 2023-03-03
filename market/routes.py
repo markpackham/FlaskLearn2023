@@ -22,14 +22,15 @@ def market_page():
         purchased_item = request.form.get('purchased_item')
         p_item_object = Item.query.filter_by(name=purchased_item).first()
         if p_item_object:
-            # assign item ownership to user who purchased
-            p_item_object.owner = current_user.id
-            current_user.budget -= p_item_object.price
-            db.session.commit()
-            flash(f'{p_item_object} purchased', category="success")
-    # if purchase_form.validate_on_submit():
-    #     # show as dictionary
-    #     # print(purchase_form.__dict__)
+            if current_user.can_purchase(p_item_object):
+                # assign item ownership to user who purchased
+                p_item_object.owner = current_user.id
+                current_user.budget -= p_item_object.price
+                db.session.commit()
+                flash(f'{p_item_object} purchased', category="success")
+            else:
+                flash(f'Sorry, you cannot afford that', category="danger")
+        return redirect(url_for('market_page'))
 
     if request.method == "GET":
         items = Item.query.filter_by(owner=None)
