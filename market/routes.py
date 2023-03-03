@@ -30,7 +30,7 @@ def market_page():
     #     # show as dictionary
     #     # print(purchase_form.__dict__)
 
-    items = Item.query.all()
+    items = Item.query.filter_by(owner=None)
     return render_template('market.html', items=items, purchase_form=purchase_form)
 
 
