@@ -26,6 +26,7 @@ def market_page():
             p_item_object.owner = current_user.id
             current_user.budget -= p_item_object.price
             db.session.commit()
+            flash(f'{p_item_object} purchased', category="success")
     # if purchase_form.validate_on_submit():
     #     # show as dictionary
     #     # print(purchase_form.__dict__)
