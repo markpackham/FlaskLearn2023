@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from market import app
 from market import db
-from market.forms import RegisterForm, LoginForm
+from market.forms import RegisterForm, LoginForm, PurchaseItemForm
 from market.models import Item, User
 from flask_login import login_user, logout_user, login_required
 
@@ -12,12 +12,19 @@ def home_page():
     return render_template('home.html')
 
 
-@app.route('/market')
+@app.route('/market', methods=['GET', 'POST'])
 # login_required prevents unauthorized users from accessing market
 @login_required
 def market_page():
+    purchase_form = PurchaseItemForm()
+
+    if purchase_form.validate_on_submit():
+        # show as dictionary
+        # print(purchase_form.__dict__)
+        print(purchase_form['submit'])
+
     items = Item.query.all()
-    return render_template('market.html', items=items)
+    return render_template('market.html', items=items, purchase_form=purchase_form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
