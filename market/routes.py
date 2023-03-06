@@ -34,7 +34,7 @@ def market_page():
     if request.method == "GET":
         items = Item.query.filter_by(owner=None)
         owned_items = Item.query.filter_by(owner=current_user.id)
-        return render_template('market.html', items=items, purchase_form=purchase_form, owned_items=owned_items)
+        return render_template('market.html', items=items, purchase_form=purchase_form, owned_items=owned_items, selling_form=selling_form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -62,6 +62,7 @@ def register_page():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
+    users = User.query.all()
     form = LoginForm()
     # check all info if valid and is triggered when we hit submit button on form
     if form.validate_on_submit():
@@ -73,7 +74,7 @@ def login_page():
         else:
             flash(f'Login params invalid', category='danger')
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, users=users)
 
 
 @app.route('/logout')
