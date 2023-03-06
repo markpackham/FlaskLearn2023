@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from market import app
 from market import db
-from market.forms import RegisterForm, LoginForm, PurchaseItemForm
+from market.forms import RegisterForm, LoginForm, PurchaseItemForm, SellItemForm
 from market.models import Item, User
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -17,6 +17,7 @@ def home_page():
 @login_required
 def market_page():
     purchase_form = PurchaseItemForm()
+    selling_form = SellItemForm()
 
     if request.method == "POST":
         purchased_item = request.form.get('purchased_item')
