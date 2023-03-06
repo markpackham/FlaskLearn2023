@@ -37,6 +37,7 @@ def market_page():
 
         if s_item_object:
             if current_user.can_sell(s_item_object):
+                s_item_object.sell(current_user)
 
         return redirect(url_for('market_page'))
 
