@@ -36,7 +36,7 @@ def market_page():
         s_item_object = Item.query.filter_by(name=sold_item).first()
 
         if s_item_object:
-            
+            if current_user.can_sell(s_item_object):
 
         return redirect(url_for('market_page'))
 

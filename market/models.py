@@ -44,6 +44,9 @@ class User(db.Model, UserMixin):
         # returns true if user can afford item
         return self.budget >= item_object.price
 
+    def can_sell(self, item_object):
+        return item_object in self.items
+
 
 class Item(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
